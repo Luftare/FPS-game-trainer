@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<div id="root">
+  <canvas id="screen"></canvas>
+  <div class="ui">
+    <div class="status section top" v-if="game && game.state.ended">
+      <div class="big">FPS trainer</div>
+      <p>
+        <strong>Objective: </strong> aim at the <span style="color:lightgreen">green</span> sphere and shoot down the <span style="color:red">red</span> spheres.
+      </p>
+      <ol>
+        <li v-for="row in leaderboard">{{row.name}}: {{row.score}}</li>
+      </ol>
+    </div>
+    <div v-if="game">
+      <timer-bar :value="game.state.life" v-show="game && !game.state.ended"></timer-bar>
+      <div class="gui">
+        <div class="big score">{{game.state.score}}</div>
+      </div>
+      <div class="menu section">
+        <table>
+           <tr>
+            <th>Name:</th>
+            <td><input type="text" v-model="game.settings.name"/></td>
+          </tr>
+          <tr>
+            <th>Sensitivity:</th>
+            <td><input type="range" v-model="game.settings.mouseSensitivity" min="0.1" max="1" step="0.05"/></td>
+          </tr>
+          <tr>
+            <th>FOV:</th>
+            <td><input type="range" v-model="game.settings.FOV" min="30" max="170" step="5"/></td>
+          </tr>
+          <tr>
+            <th>Bullet speed:</th>
+            <td><input type="range" v-model="game.settings.bulletSpeed" min="0.0001" max="1" step="0.05"/></td>
+          </tr>
+          <tr>
+            <th>Move around:</th>
+            <td>W, A, S, D keys</td>
+          </tr>
+          <tr>
+            <th>Jump:</th>
+            <td>Space key</td>
+          </tr>
+          <tr>
+            <th>New game:</th>
+            <td>R key</td>
+          </tr>
+          <tr>
+            <th>Free mouse:</th>
+            <td>Esc key</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="js/vue.js"></script>
+<script src="js/V3.js"></script>
+<script src="js/funcs.js"></script>
+<script src="js/Loop.js"></script>
+<script src="js/Target.js"></script>
+<script src="js/Bullet.js"></script>
+<script src="js/Player.js"></script>
+<script src="js/input.js"></script>
+<script src="js/Game.js"></script>
+<script src="js/index.js"></script>
